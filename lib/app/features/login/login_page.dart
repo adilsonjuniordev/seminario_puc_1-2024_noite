@@ -1,5 +1,11 @@
+import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:puc_minas/app/core/constants/app_assets.dart';
+import 'package:puc_minas/app/core/constants/app_routes.dart';
+import 'package:puc_minas/app/features/login/login_controller.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 import 'package:validatorless/validatorless.dart';
 
 class LoginPage extends StatefulWidget {
@@ -32,6 +38,10 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(height: 40),
                 TextFormField(
                   controller: cpfEC,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.digitsOnly,
+                    CpfInputFormatter(),
+                  ],
                   validator: Validatorless.multiple([
                     Validatorless.cpf('O CPF é inválido'),
                     Validatorless.required('Este campo é obrigatório'),
@@ -53,8 +63,36 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 const SizedBox(height: 20),
                 ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
                     bool valid = formKey.currentState?.validate() ?? false;
+
+                    if (valid) {
+                      showTopSnackBar(
+                        Overlay.of(context),
+                        CustomSnackBar.info(message: 'Aguarde...'),
+                      );
+
+                      bool result = await LoginController.login(
+                        cpf: cpfEC.text.replaceAll('.', '').replaceAll('-', ''),
+                        senha: passwordEC.text,
+                      );
+                      if (result) {
+                        showTopSnackBar(
+                          Overlay.of(context),
+                          CustomSnackBar.success(
+                            message: 'Login efetuado com sucesso',
+                          ),
+                        );
+                        Navigator.of(context).pushNamedAndRemoveUntil(AppRoutes.home, (route) => false);
+                      } else {
+                        showTopSnackBar(
+                          Overlay.of(context),
+                          CustomSnackBar.error(
+                            message: 'Login inválido',
+                          ),
+                        );
+                      }
+                    }
                   },
                   child: const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
