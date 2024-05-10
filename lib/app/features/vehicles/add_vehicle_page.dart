@@ -94,7 +94,7 @@ class _AddVehiclePageState extends State<AddVehiclePage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Selecione a cor:'),
+                      const Text('Selecione a cor:'),
                       Container(
                         height: 50,
                         width: 50,
