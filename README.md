@@ -14,11 +14,14 @@ Projeto desenvolvido em 05/2024, utilizando o framework Flutter, com o intuito d
 
 ## Packages utilizados
 
-| Package           | Versão | Descrição                                         |
-| :---------------- | :----- | :------------------------------------------------ |
-| `flutter_animate` | ^4.2.0 | Utilizado para criar animações nos componentes.   |
-| `validatorless`   | ^1.2.3 | Utilizado para validar os campos dos formulários. |
-| `sqflite`         | ^2.3.3 | Utilizado para armazenar dados no banco de dados relacional. |
+| Package                  | Versão  | Descrição                                            |
+| :----------------------- | :------ | :--------------------------------------------------- |
+| `flutter_animate`        | ^4.2.0  | Utilizado para criar animações nos componentes.      |
+| `validatorless`          | ^1.2.3  | Utilizado para validar os campos dos formulários.    |
+| `brasil_fields`          | ^1.14.3 | Utilizado para validar os campos dos formulários.    |
+| `shared_preferences`     | ^2.2.3  | Utilizado para salvar dados em cache no dispositivo  |
+| `flex_color_picker`      | ^3.4.1  | Utilizado para abrir picker de seleção de cores      |
+| `top_snackbar_flutter`   | ^3.1.0  | Utilizado para exibir snackbars de interação no app  |
 
 ## Como utilizar
 
