@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:puc_minas/app/core/constants/app_routes.dart';
+import 'package:puc_minas/app/core/models/vehicle_model.dart';
 import 'package:puc_minas/app/features/home/home_controller.dart';
 
 class HomePage extends StatefulWidget {
@@ -10,6 +11,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  List<VehicleModel> vehicles = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,8 +32,12 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.of(context).pushNamed(AppRoutes.add);
+        onPressed: () async {
+         VehicleModel? vehicle = await Navigator.of(context).pushNamed(AppRoutes.add);
+
+         if (vehicle != null) {
+          vehicles.add(vehicle);
+         }
         },
         backgroundColor: Colors.green,
         child: const Icon(

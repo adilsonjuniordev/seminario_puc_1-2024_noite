@@ -1,6 +1,7 @@
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:puc_minas/app/core/models/vehicle_model.dart';
 import 'package:validatorless/validatorless.dart';
 
 class AddVehiclePage extends StatefulWidget {
@@ -117,7 +118,19 @@ class _AddVehiclePageState extends State<AddVehiclePage> {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    if (formKey.currentState?.validate() ?? false) {}
+                    if (formKey.currentState?.validate() ?? false) {
+
+                      int year = DateTime.now().year;
+
+                      VehicleModel vehicle = VehicleModel(
+                        brand: brandEC.text,
+                        plate: plateEC.text,
+                        year: int.tryParse(yearEC.text) ?? year,
+                        color: selectedColor,
+                      );
+
+                      Navigator.of(context).pop(vehicle);
+                    }
                   },
                   child: const Text('Cadastrar'),
                 ),
