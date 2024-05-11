@@ -1,4 +1,3 @@
-import 'package:color_parser/color_parser.dart';
 import 'package:flutter/material.dart';
 import 'package:puc_minas/app/core/models/vehicle_model.dart';
 

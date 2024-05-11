@@ -1,8 +1,7 @@
-import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:puc_minas/app/core/models/vehicle_model.dart';
 import 'package:validatorless/validatorless.dart';
+import 'package:flex_color_picker/flex_color_picker.dart';
+import 'package:puc_minas/app/core/models/vehicle_model.dart';
 
 class AddVehiclePage extends StatefulWidget {
   const AddVehiclePage({super.key});
@@ -15,9 +14,7 @@ class _AddVehiclePageState extends State<AddVehiclePage> {
   final plateEC = TextEditingController();
   final brandEC = TextEditingController();
   final yearEC = TextEditingController();
-
   final formKey = GlobalKey<FormState>();
-
   Color selectedColor = Colors.green;
 
   @override
@@ -47,9 +44,7 @@ class _AddVehiclePageState extends State<AddVehiclePage> {
                 validator: Validatorless.multiple([
                   Validatorless.required('Campo obrigatório'),
                 ]),
-                decoration: const InputDecoration(
-                  hintText: 'Marca do veículo',
-                ),
+                decoration: const InputDecoration(hintText: 'Marca do veículo'),
               ),
               const SizedBox(height: 15),
               TextFormField(
@@ -58,9 +53,7 @@ class _AddVehiclePageState extends State<AddVehiclePage> {
                   Validatorless.required('Campo obrigatório'),
                   Validatorless.number('Número inválido'),
                 ]),
-                decoration: const InputDecoration(
-                  hintText: 'Ano do veículo',
-                ),
+                decoration: const InputDecoration(hintText: 'Ano do veículo'),
               ),
               const SizedBox(height: 15),
               GestureDetector(
@@ -119,7 +112,6 @@ class _AddVehiclePageState extends State<AddVehiclePage> {
                 child: ElevatedButton(
                   onPressed: () {
                     if (formKey.currentState?.validate() ?? false) {
-
                       int year = DateTime.now().year;
 
                       VehicleModel vehicle = VehicleModel(

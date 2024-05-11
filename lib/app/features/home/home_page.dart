@@ -27,7 +27,9 @@ class _HomePageState extends State<HomePage> {
             onPressed: () async {
               bool result = await HomeController.logout();
               if (result) {
-                Navigator.of(context).pushNamedAndRemoveUntil(AppRoutes.login, (route) => false);
+                if (context.mounted) {
+                  Navigator.of(context).pushNamedAndRemoveUntil(AppRoutes.login, (route) => false);
+                }
               }
             },
             icon: const Icon(Icons.logout),
@@ -50,7 +52,7 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.all(12),
+        padding: const EdgeInsets.all(12),
         child: Column(
           children: [
             vehicles.isEmpty
@@ -78,23 +80,26 @@ class _HomePageState extends State<HomePage> {
                             try {
                               vehicles.removeAt(index);
                               setState(() {});
-                              showTopSnackBar(
-                                Overlay.of(context),
-                                const CustomSnackBar.success(message: 'O veículo foi excluído'),
-                              );
+                              if (context.mounted) {
+                                showTopSnackBar(
+                                  Overlay.of(context),
+                                  const CustomSnackBar.success(message: 'O veículo foi excluído'),
+                                );
+                              }
                             } catch (e) {
-                              showTopSnackBar(
-                                Overlay.of(context),
-                                const CustomSnackBar.error(message: 'O veículo não pode ser excluído'),
-                              );
+                              if (context.mounted) {
+                                showTopSnackBar(
+                                  Overlay.of(context),
+                                  const CustomSnackBar.error(message: 'O veículo não pode ser excluído'),
+                                );
+                              }
                             }
                           }
+                          return deleted;
                         },
                         child: Padding(
                           padding: const EdgeInsets.all(10),
-                          child: VehicleCard(
-                            vehicle: vehicles[index],
-                          ),
+                          child: VehicleCard(vehicle: vehicles[index]),
                         ),
                       );
                     },

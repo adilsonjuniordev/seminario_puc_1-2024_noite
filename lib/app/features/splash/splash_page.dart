@@ -34,9 +34,13 @@ class _SplashPageState extends State<SplashPage> {
 
                 var result = sp.getString('cpf');
                 if (result != null) {
-                  Navigator.of(context).pushNamedAndRemoveUntil(AppRoutes.home, (route) => false);
+                  if (context.mounted) {
+                    Navigator.of(context).pushNamedAndRemoveUntil(AppRoutes.home, (route) => false);
+                  }
                 } else {
-                  Navigator.of(context).pushNamed(AppRoutes.login);
+                  if (context.mounted) {
+                    Navigator.of(context).pushNamed(AppRoutes.login);
+                  }
                 }
               },
               child: const Text('ENTRAR'),

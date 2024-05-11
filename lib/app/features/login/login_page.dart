@@ -67,30 +67,38 @@ class _LoginPageState extends State<LoginPage> {
                     bool valid = formKey.currentState?.validate() ?? false;
 
                     if (valid) {
-                      showTopSnackBar(
-                        Overlay.of(context),
-                        CustomSnackBar.info(message: 'Aguarde...'),
-                      );
+                      if (context.mounted) {
+                        showTopSnackBar(
+                          Overlay.of(context),
+                          const CustomSnackBar.info(message: 'Aguarde...'),
+                        );
+                      }
 
                       bool result = await LoginController.login(
                         cpf: cpfEC.text.replaceAll('.', '').replaceAll('-', ''),
                         senha: passwordEC.text,
                       );
                       if (result) {
-                        showTopSnackBar(
-                          Overlay.of(context),
-                          CustomSnackBar.success(
-                            message: 'Login efetuado com sucesso',
-                          ),
-                        );
-                        Navigator.of(context).pushNamedAndRemoveUntil(AppRoutes.home, (route) => false);
+                        if (context.mounted) {
+                          showTopSnackBar(
+                            Overlay.of(context),
+                            const CustomSnackBar.success(
+                              message: 'Login efetuado com sucesso',
+                            ),
+                          );
+                        }
+                        if (context.mounted) {
+                          Navigator.of(context).pushNamedAndRemoveUntil(AppRoutes.home, (route) => false);
+                        }
                       } else {
-                        showTopSnackBar(
-                          Overlay.of(context),
-                          CustomSnackBar.error(
-                            message: 'Login inválido',
-                          ),
-                        );
+                        if (context.mounted) {
+                          showTopSnackBar(
+                            Overlay.of(context),
+                            const CustomSnackBar.error(
+                              message: 'Login inválido',
+                            ),
+                          );
+                        }
                       }
                     }
                   },
